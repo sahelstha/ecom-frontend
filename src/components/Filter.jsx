@@ -11,15 +11,7 @@ import { FaArrowDown, FaArrowUp, FaSearch } from "react-icons/fa";
 import { FiRefreshCcw, FiRefreshCw } from "react-icons/fi";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-const Filter = () => {
-  const categories = [
-    { categoryId: 1, categoryName: "Electronics" },
-    { categoryId: 2, categoryName: "Clothing" },
-    { categoryId: 3, categoryName: "Furniture" },
-    { categoryId: 4, categoryName: "Books" },
-    { categoryId: 5, categoryName: "Toys" },
-  ];
-
+const Filter = ({ categories }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const pathName = useLocation().pathname;
