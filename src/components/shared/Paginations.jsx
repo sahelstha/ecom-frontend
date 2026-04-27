@@ -10,12 +10,12 @@ const Paginations = ({ numberOfPage, totalProducts }) => {
     ? Number(searchParams.get("page"))
     : 1;
 
-  console.log("pathname", pathname);
+  // console.log("pathname", pathname);
 
   const onChangeHandler = (event, value) => {
     params.set("page", value.toString());
     navigate(`${pathname}?${params.toString()}`);
-    console.log("pathname", pathname);
+    // console.log("pathname", pathname);
   };
 
   return (
