@@ -42,7 +42,7 @@ export const fetchCategories = () => async (dispatch) => {
 
     dispatch({ type: "CATEGORY_SUCCESS" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     dispatch({
       type: "IS_ERROR",
       payload: error?.response?.data?.message || "Failed to fetch category",
