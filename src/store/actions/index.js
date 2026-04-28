@@ -72,7 +72,8 @@ export const addToCart =
     if (isQuantityExist) {
       dispatch({
         type: "ADD_CART",
-        payload: { ...data, quantity: quantity },
+        // payload: { ...data, quantity: quantity },
+        payload: { ...data, quantity, stock: getProduct.quantity },
       });
 
       toast.success(`${data.productName} added to the cart`);
@@ -86,15 +87,19 @@ export const addToCart =
 export const increaseCartQuantity =
   (data, toast, currentQuantity, setCurrentQuantity) =>
   (dispatch, getState) => {
-    const { products } = getState().product;
+    // const { products } = getState().product;
     // console.log(products);
 
-    const getProduct = products.find(
-      (item) => item.productId === data.productId,
-    );
+    // const getProduct = products.find(
+    //   (item) => item.productId === data.productId,
+    // );
     // console.log(getProduct);
 
-    const isQuantityExist = getProduct.quantity >= currentQuantity + 1;
+    const isQuantityExist = data.stock >= currentQuantity + 1;
+
+    // console.log("exit?", isQuantityExist);
+    // console.log("currentQuantity:", currentQuantity);
+    // console.log("data.stock", data.stock);
 
     if (isQuantityExist) {
       const newQuantity = currentQuantity + 1;

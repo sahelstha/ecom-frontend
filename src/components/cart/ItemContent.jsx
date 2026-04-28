@@ -17,6 +17,7 @@ const ItemContent = ({
   price,
   discount,
   specialPrice,
+  stock,
   cartId,
 }) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
@@ -85,6 +86,7 @@ const ItemContent = ({
               specialPrice,
               price,
               productId,
+              stock,
               quantity,
             });
           }}
@@ -96,6 +98,7 @@ const ItemContent = ({
               specialPrice,
               price,
               productId,
+              stock,
               quantity,
             });
           }}
