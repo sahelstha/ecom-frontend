@@ -56,6 +56,9 @@ export const addToCart =
     // console.log(getState());
     // Find the product
     const { products } = getState().product;
+
+    // console.log(products);
+
     const getProduct = products.find(
       (item) => item.productId === data.productId,
     );
@@ -63,16 +66,47 @@ export const addToCart =
     // Check for stocks
     const isQuantityExist = getProduct.quantity >= quantity;
 
+    // console.log("quantity", getProduct.quantity);
+
     // If in stock -> add
     if (isQuantityExist) {
       dispatch({
         type: "ADD_CART",
         payload: { ...data, quantity: quantity },
       });
+
       toast.success(`${data.productName} added to the cart`);
       localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
     } else {
       // If not in stock -> error
       toast.error("Out of Stock!");
+    }
+  };
+
+export const increaseCartQuantity =
+  (data, toast, currentQuantity, setCurrentQuantity) =>
+  (dispatch, getState) => {
+    const { products } = getState().product;
+    console.log(products);
+
+    const getProduct = products.find(
+      (item) => item.productId === data.productId,
+    );
+    console.log(getProduct);
+
+    const isQuantityExist = getProduct.quantity >= currentQuantity + 1;
+
+    if (isQuantityExist) {
+      const newQuantity = currentQuantity + 1;
+      setCurrentQuantity(newQuantity);
+
+      dispatch({
+        type: "ADD_CART",
+        payload: { ...data, quantity: newQuantity + 1 },
+      });
+
+      localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
+    } else {
+      toast.error("Quantity Reached to Limit!");
     }
   };
