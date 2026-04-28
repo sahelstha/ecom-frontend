@@ -11,6 +11,7 @@ const SetQuantity = ({
       {cartCounter ? null : <div className="text-semibold">QUANTITY</div>}
       <div className="flex md:flex-row flex-col gap-4 items-center lg:text-[22px] text-sm">
         <button
+          onClick={handleQtyDecrease}
           disabled={quantity <= 1}
           className="border border-slate-800 px-3 py-1 rounded cursor-pointer"
         >
