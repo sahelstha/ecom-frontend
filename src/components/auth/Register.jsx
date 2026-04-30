@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { FaUserPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { registerNewUser } from "../../store/actions";
+import Spiners from "../shared/Spiners";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -83,7 +84,13 @@ const Register = () => {
           className="bg-button-gradient flex gap-2 items-center justify-center font-semibold text-white w-full py-2 hover:text-slate-400 transition-colors duration-100 rounded-sm my-3 cursor-pointer"
           type="submit"
         >
-          {loader ? <>Loading...</> : <>Register</>}
+          {loader ? (
+            <>
+              <Spiners /> Loading...
+            </>
+          ) : (
+            <>Register</>
+          )}
         </button>
 
         <p className="text-center text-sm text-slate-700 mt-6 ">
