@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import BackDrop from "./BackDrop";
+import { truncateText } from "../utils/truncateText";
 
 const UserMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -51,7 +52,9 @@ const UserMenu = () => {
         <Link to="/profile">
           <MenuItem className="flex gap-2" onClick={handleClose}>
             <BiUserCheck className="text-xl" />
-            <span className="font-bold text-[16px] mt-1">{user?.username}</span>
+            <span className="font-bold text-[16px] mt-1">
+              {truncateText(user?.username, 8)}
+            </span>
           </MenuItem>
         </Link>
 
