@@ -1,16 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineLogin } from "react-icons/ai";
 import InputField from "../shared/InputField";
-import { useDispatch } from "react-redux";
-import { authenticateSignInUser } from "../../store/actions";
 import toast from "react-hot-toast";
+import { FaUserPlus } from "react-icons/fa";
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-  const dispatch = useDispatch();
 
   const {
     register,
@@ -21,22 +18,21 @@ const Login = () => {
     mode: "onTouched",
   });
 
-  const loginHandler = async (data) => {
-    console.log("Login Click");
-    dispatch(authenticateSignInUser(data, toast, reset, navigate, setLoader));
+  const registerHandler = async (data) => {
+    console.log("Register Click");
   };
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex justify-center items-center">
       <form
-        onSubmit={handleSubmit(loginHandler)}
+        onSubmit={handleSubmit(registerHandler)}
         className="sm:w-112.5 w-90 shadow-custom py-8 sm:px-8 px-4 rounded-md"
         action=""
       >
         <div className="flex flex-col items-center justify-center space-y-4">
-          <AiOutlineLogin className="text-slate-800 text-5xl" />
+          <FaUserPlus className="text-slate-800 text-5xl" />
           <h1 className="text-slate-800 text-center font-montserrat lg:text-3xl text-2xl font-bold">
-            Login Here
+            Register Here
           </h1>
         </div>
 
@@ -55,9 +51,21 @@ const Login = () => {
           />
 
           <InputField
+            label="Email"
+            required
+            id="email"
+            type="email"
+            message="*Email is required"
+            placeholder="Enter your Email"
+            register={register}
+            errors={errors}
+          />
+
+          <InputField
             label="Password"
             required
             id="password"
+            min={6}
             type="password"
             message="*Password is required"
             placeholder="Enter your Password"
@@ -71,16 +79,16 @@ const Login = () => {
           className="bg-button-gradient flex gap-2 items-center justify-center font-semibold text-white w-full py-2 hover:text-slate-400 transition-colors duration-100 rounded-sm my-3 cursor-pointer"
           type="submit"
         >
-          {loader ? <>Loading...</> : <>Login</>}
+          {loader ? <>Loading...</> : <>Register</>}
         </button>
 
         <p className="text-center text-sm text-slate-700 mt-6 ">
-          Don't have an account?
+          Already have an account?
           <Link
             className="font-semibold underline hover:text-black"
-            to="/register"
+            to="/login"
           >
-            <span> SignUp</span>
+            <span> Login</span>
           </Link>
         </p>
       </form>
@@ -88,4 +96,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
