@@ -198,3 +198,24 @@ export const addUpdateUserAddress =
       setOpenAddressModel(false);
     }
   };
+
+export const getUserAddresses = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: "IS_FETCHING" });
+
+    const { data } = await api.get(`user/addresses`);
+    dispatch({
+      type: "USER_ADDRESS",
+      payload: data,
+    });
+
+    dispatch({ type: "IS_SUCCESS" });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "IS_ERROR",
+      payload:
+        error?.response?.data?.message || "Failed to fetch user's address",
+    });
+  }
+};

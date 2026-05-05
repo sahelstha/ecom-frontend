@@ -39,6 +39,8 @@ export const errorReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         errorMessage: action.payload,
+        btnLoader: false,
+        categoryLoader: false,
       };
 
     case "CATEGORY_SUCCESS":
