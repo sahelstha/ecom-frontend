@@ -2,10 +2,14 @@ import React from "react";
 import InputField from "../shared/InputField";
 import { useForm } from "react-hook-form";
 import { FaAddressCard } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { addUpdateUserAddress } from "../../store/actions";
+import Spiners from "../shared/Spiners";
 
-const AddAddressForm = () => {
+const AddAddressForm = ({ address, setOpenAddressModel }) => {
+  const dispatch = useDispatch();
   const { btnLoader } = useSelector((state) => state.errors);
 
   const {
@@ -18,7 +22,14 @@ const AddAddressForm = () => {
   });
 
   const onSaveAddressHandler = async (data) => {
-    console.log("Login Click");
+    dispatch(
+      addUpdateUserAddress(
+        data,
+        toast,
+        address?.addressId,
+        setOpenAddressModel,
+      ),
+    );
   };
 
   return (
@@ -37,7 +48,7 @@ const AddAddressForm = () => {
           <InputField
             label="Building Name"
             required
-            id="building"
+            id="buildingName"
             type="text"
             message="*Building Name is required"
             placeholder="Enter Buidling Name"

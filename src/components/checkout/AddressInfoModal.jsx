@@ -16,7 +16,7 @@ const AddressInfoModal = ({ open, setOpen, children }) => {
       className="relative z-50"
     >
       {/* The backdrop, rendered as a fixed sibling to the panel container */}
-      <DialogBackdrop className="fixed inset-0 bg-black/30" />
+      <DialogBackdrop className="fixed inset-0 bg-gray-500 opacity-75" />
 
       {/* Full-screen container to center the panel */}
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
@@ -27,7 +27,7 @@ const AddressInfoModal = ({ open, setOpen, children }) => {
             <button
               onClick={() => setOpen(false)}
               type="button"
-              className="flex justify-end gap-4 absolute right-4 top-2"
+              className="flex justify-end gap-4 absolute right-4 top-2 cursor-pointer"
             >
               <FaTimes className="text-slate-700" size={25} />
             </button>

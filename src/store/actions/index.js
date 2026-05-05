@@ -177,3 +177,24 @@ export const logOutUser = (navigate) => (dispatch) => {
   localStorage.removeItem("auth");
   navigate("/login");
 };
+
+export const addUpdateUserAddress =
+  (sendData, toast, addressId, setOpenAddressModel) =>
+  async (dispatch, getState) => {
+    const { user } = getState().auth;
+
+    dispatch({
+      type: "BUTTON_LOADER",
+    });
+    try {
+      const { data } = await api.post("/addresses", sendData);
+      toast.success("Address saved successfully");
+      dispatch({ type: "IS_SUCCESS" });
+    } catch (error) {
+      console.log("error: ", error);
+      toast.error(error?.response?.data?.message || "INTERNAL SERVER ERROR");
+      dispatch({ type: "IS_ERROR", payload: null });
+    } finally {
+      setOpenAddressModel(false);
+    }
+  };
