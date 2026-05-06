@@ -1,5 +1,6 @@
 import { Button, Step, StepLabel, Stepper } from "@mui/material";
 import React, { act, useEffect, useState } from "react";
+import Skeleton from "../shared/Skeleton";
 import AddressInfo from "./AddressInfo";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,6 +8,7 @@ import {
   selectUserCheckoutAddress,
 } from "../../store/actions";
 import toast from "react-hot-toast";
+import ErrorPage from "../shared/ErrorPage";
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -51,9 +53,15 @@ const Checkout = () => {
         ))}
       </Stepper>
 
-      <div className="mt-5">
-        {activeStep === 0 && <AddressInfo address={address} />}
-      </div>
+      {isLoading ? (
+        <div className="lg:w-[80%] mx-auto py-5">
+          <Skeleton />
+        </div>
+      ) : (
+        <div className="mt-5">
+          {activeStep === 0 && <AddressInfo address={address} />}
+        </div>
+      )}
 
       <div
         className="flex justify-between items-center px-4 fixed z-50 h-24 bottom-0 bg-white left-0 w-full py-4 border-slate-200 "
@@ -90,6 +98,8 @@ const Checkout = () => {
           </button>
         )}
       </div>
+
+      {errorMessage && <ErrorPage message={errorMessage} />}
     </div>
   );
 };
