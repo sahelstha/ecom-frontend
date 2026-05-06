@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { FaAddressBook } from "react-icons/fa";
 import AddressInfoModal from "./AddressInfoModal";
 import AddAddressForm from "./AddAddressForm";
+import { useSelector } from "react-redux";
+import AddressList from "./AddressList";
 
-const AddressInfo = () => {
+const AddressInfo = ({ address }) => {
   const [openAddressModel, setOpenAddressModel] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
 
@@ -13,8 +15,8 @@ const AddressInfo = () => {
     setOpenAddressModel(true);
   };
 
-  const noAddressExist = true;
-  const isLoading = false;
+  const noAddressExist = !address || address?.length === 0;
+  const { isLoading, btnLoader } = useSelector((state) => state.errors);
 
   return (
     <div className="pt-4">
@@ -46,16 +48,33 @@ const AddressInfo = () => {
               <Skeleton />
             </div>
           ) : (
-            <div className="space-y-4 pt-6">
-              <p>Address list here...</p>
-            </div>
+            <>
+              <div className="space-y-4 pt-6">
+                <AddressList
+                  addresses={address}
+                  setSelectedAddress={setSelectedAddress}
+                  setOpenAddressModel={setOpenAddressModel}
+                />
+              </div>
+
+              {address.length > 0 && (
+                <div>
+                  <button
+                    onClick={addNewAddressHandler}
+                    className="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-all"
+                  >
+                    Add More
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       )}
 
       <AddressInfoModal open={openAddressModel} setOpen={setOpenAddressModel}>
         <AddAddressForm
-          address={selectedAddress}
+          addresses={selectedAddress}
           setOpenAddressModel={setOpenAddressModel}
         />
       </AddressInfoModal>
