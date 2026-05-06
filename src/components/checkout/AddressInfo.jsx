@@ -18,6 +18,8 @@ const AddressInfo = ({ address }) => {
   const noAddressExist = !address || address?.length === 0;
   const { isLoading, btnLoader } = useSelector((state) => state.errors);
 
+  // console.log("address:", address, "loading:", isLoading);
+
   return (
     <div className="pt-4">
       {noAddressExist ? (
@@ -72,9 +74,10 @@ const AddressInfo = ({ address }) => {
         </div>
       )}
 
+      {/* {console.log("address:", address, "selected:", selectedAddress)} */}
       <AddressInfoModal open={openAddressModel} setOpen={setOpenAddressModel}>
         <AddAddressForm
-          addresses={selectedAddress}
+          address={selectedAddress}
           setOpenAddressModel={setOpenAddressModel}
         />
       </AddressInfoModal>

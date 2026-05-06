@@ -19,6 +19,8 @@ const AddressList = ({
   const { selectedUserAddress } = useSelector((state) => state.auth);
 
   const onEditButtonHandler = (address) => {
+    // console.log(address);
+
     setSelectedAddress(address);
     setOpenAddressModel(true);
   };
