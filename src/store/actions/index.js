@@ -274,7 +274,6 @@ export const createUserCart = (sendCartItems) => async (dispatch, getState) => {
     await api.post("/cart/create", sendCartItems);
 
     await dispatch(getUserCart());
-    // console.log("data");
   } catch (error) {
     console.log(error);
     dispatch({
