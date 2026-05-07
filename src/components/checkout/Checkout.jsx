@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 import ErrorPage from "../shared/ErrorPage";
 import PaymentMethod from "./PaymentMethod";
 import OrderSummary from "./OrderSummary";
+import StripePayment from "./StripePayment";
+import PayPalPayment from "./PayPalPayment";
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -48,7 +50,7 @@ const Checkout = () => {
   }, [dispatch]);
 
   return (
-    <div className="py-14 min-h-[calc(100vh-100px)]">
+    <div className="py-14 min-h-[calc(100vh-100px)] mb-16">
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label, index) => (
           <Step key={index}>
@@ -72,6 +74,15 @@ const Checkout = () => {
               address={selectedUserAddress}
               paymentMethod={paymentMethod}
             />
+          )}
+          {activeStep === 3 && (
+            <>
+              {paymentMethod === "Stripe" ? (
+                <StripePayment />
+              ) : (
+                <PayPalPayment />
+              )}
+            </>
           )}
         </div>
       )}
