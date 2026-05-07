@@ -74,10 +74,10 @@ const AddressInfo = ({ address }) => {
               </div>
 
               {address.length > 0 && (
-                <div>
+                <div className="flex items-center justify-center">
                   <button
                     onClick={addNewAddressHandler}
-                    className="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-all"
+                    className=" px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-all mt-5"
                   >
                     Add More
                   </button>

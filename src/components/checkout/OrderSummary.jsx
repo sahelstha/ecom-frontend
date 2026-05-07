@@ -51,7 +51,7 @@ const OrderSummary = ({ totalPrice, cart, address, paymentMethod }) => {
                     <img
                       src={`${import.meta.env.VITE_BACK_END_URL}/images/${item?.image}`}
                       alt="Product"
-                      className="w-24 h-24 rounded"
+                      className="w-24 h-24 rounded object-cover"
                     ></img>
 
                     <div className="text-gray-500">
