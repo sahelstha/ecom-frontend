@@ -14,10 +14,22 @@ const StripePayment = () => {
   const { clientSecret } = useSelector((state) => state.auth);
   const { totalPrice } = useSelector((state) => state.carts);
   const { isLoading, errorMessage } = useSelector((state) => state.errors);
+  const { user, selectedUserAddress } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!clientSecret) {
-      dispatch(createStripePaymentSecret(totalPrice));
+      const sendData = {
+        amount: Number(totalPrice) * 100,
+        currency: "usd",
+        email: user.email,
+        name: `${user.username}`,
+        address: selectedUserAddress,
+        description: `Order for ${user.email}`,
+        metadata: {
+          test: "1",
+        },
+      };
+      dispatch(createStripePaymentSecret(sendData));
     }
   }, [clientSecret]);
 

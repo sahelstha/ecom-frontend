@@ -14,7 +14,7 @@ const PaymentConfirmation = () => {
   const { cart } = useSelector((state) => state.carts);
   const [loading, setLoading] = useState(false);
 
-  const { selectedUserCheckoutAddress } = useSelector((state) => state.auth);
+  const { selectedUserAddress } = useSelector((state) => state.auth);
 
   const paymentIntent = searchParams.get("payment_intent");
   const clientSecret = searchParams.get("payment_intent_client_secret");
@@ -29,14 +29,14 @@ const PaymentConfirmation = () => {
       cart?.length > 0
     ) {
       const sendData = {
-        addressId: selectedUserCheckoutAddress.addressId,
+        addressId: selectedUserAddress.addressId,
         pgName: "Stripe",
         pgPaymentId: paymentIntent,
         pgStatus: "succeeded",
         pgResponseMessage: "Pyament successful",
       };
 
-      console.log("add", selectedUserCheckoutAddress);
+      console.log("add", selectedUserAddress);
       console.log(sendData);
 
       dispatch(
