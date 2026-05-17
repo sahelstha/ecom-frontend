@@ -2,7 +2,7 @@ import { FaEdit } from "react-icons/fa";
 import Modal from "../shared/Modal";
 import { useState } from "react";
 
-export const adminOrderTableColumn = [
+export const adminOrderTableColumn = (handleEdit) => [
   {
     sortable: false,
     disableColumnMenu: true,
@@ -90,7 +90,7 @@ export const adminOrderTableColumn = [
         <div className="flex justify-center items-center space-x-2 h-full pt-2">
           <button
             className="flex items-center bg-blue-500 text-white px-4 h-9 rounded-md"
-            onClick={() => <Modal open={open} setOpen={setOpen} />}
+            onClick={() => handleEdit(params.row)}
           >
             <FaEdit className="mr-2 " />
             Edit
