@@ -30,6 +30,11 @@ const OrderTable = ({ adminOrder, pagination }) => {
     navigate(`${pathName}?${params.toString()}`);
   };
 
+  const handleEdit = (order) => {
+    setSelectedItem(order);
+    setUpdateOpenModal(true);
+  };
+
   return (
     <div>
       <h1 className="text-slate-800 text-3xl text-center font-bold pb-6 uppercase">
